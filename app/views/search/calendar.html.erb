@@ -1,0 +1,17 @@
+<% horas_al_mes = 0 %>
+<%= month_calendar(attribute: :start_date, end_attribute: :end_date) do |date| %>
+  <%= date.day %>
+  <br>
+  <% @lista.each do |registro| %>
+    <% if registro.job_entry.to_date == date %>
+      <%= registro.job_entry.strftime("%I:%M:%S %p") %>
+      <br>
+      <%= registro.job_exit ? registro.job_exit.strftime("%I:%M:%S %p") : "Sigue trabajando" %>
+      <br>
+      <%= registro.daily_hours ? "Hrs trabajadas : " + (registro.daily_hours.to_i).to_s : "" %>
+      <% horas_al_mes = horas_al_mes + registro.daily_hours.to_i %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h2>Mensual: <%= horas_al_mes %> Horas</h2>

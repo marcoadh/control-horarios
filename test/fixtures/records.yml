@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job_entry: 2021-08-28 10:08:52
+  job_exit: 2021-08-28 10:08:52
+  daily_hours: 1.5
+  employee: one
+
+two:
+  job_entry: 2021-08-28 10:08:52
+  job_exit: 2021-08-28 10:08:52
+  daily_hours: 1.5
+  employee: two
