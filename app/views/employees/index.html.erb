@@ -2,7 +2,7 @@
 
 <div>  
   <%= link_to new_employee_path, {remote: true, class: "btn btn-info", id: "anadir-categoria-btn"}  do %>
-    <span class="fas fa-plus-square" ></span>
+    <span class="fas fa-plus-square"> Nuevo Empleado</span>
   <% end %>
 </div>
 
@@ -15,11 +15,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>Nombre / Apellido</th>
                     </tr>
                 </thead>
 
@@ -27,12 +23,9 @@
                 <% @empleados.each do |e| %>
                     <tr id = "empleado_<%= e.id %>">
                         <td><%= e.id %></td>
-                        <td><%= e.nombre %></td>
-                        <td><%= e.apellido %></td>
-                        <td>
-                            <!-- <%= form_tag( '/searchEmpleado') do %><%= hidden_field_tag("id", value = e.id) %><%= submit_tag(value = "Lista", options = { class: "btn btn-primary" }) do %><% end %><% end %> -->
-                            <%= form_tag( '/searchInCalendar') do %><%= hidden_field_tag("id", value = e.id) %><%= submit_tag(value = "Calendario", options = { class: "btn btn-primary" }) do %><% end %><% end %>
-                        </td>
+                        <td><%= e.nombre + ", " + e.apellido %></td>
+                        <!-- <td><%= link_to "Lista", searchEmpleado_path(:id => e.id), html_options = {class: "btn btn-success"} %></td> -->
+                        <td><%= link_to "Calendario", searchInCalendar_path(:id => e.id), html_options = {class: "btn btn-primary"} %></td>
                         <td><%= link_to "editar", edit_employee_path(e), html_options = {class: "btn btn-info btn-xs", remote: true} %></td>
                         <td><%= link_to 'borrar', e, remote: true, method: :delete, data: {confirm: "¿Eliminar empleado: #{e.nombre}?"}, class: "btn btn-danger btn-xs"%></td>
                     </tr>

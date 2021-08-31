@@ -14,17 +14,17 @@
                     <% horas_al_mes = 0 %>
                     <% @lista.each do |reg| %>
                     <tr>
-                        <td><%= reg.employee_id%></td>
-                        <td><%= reg.entrada.strftime("%Y-%m-%d %H:%M") %></td>
-                        <td><%= reg.salida.strftime("%Y-%m-%d %H:%M") %></td>
-                        <td><%= reg.horas %></td>
-                        <% horas_al_mes = horas_al_mes + reg.horas %>
+                        <td><%= reg.employee.nombre + " " + reg.employee.apellido%></td>
+                        <td><%= reg.job_entry.strftime("%Y-%m-%d %H:%M") %></td>
+                        <td><%= reg.job_exit.strftime("%Y-%m-%d %H:%M") %></td>
+                        <td><%= reg.daily_hours %></td>
+                        <% horas_al_mes = horas_al_mes + reg.daily_hours %>
                     </tr>
                     <% end %>
                 </tbody>
             </table>
 
-            <h5>Horas al mes: <%= horas_al_mes.to_i %></h5>
+            <h5>Horas al mes: <%= horas_al_mes.to_f %></h5>
         </div>
     </div>
 </div>

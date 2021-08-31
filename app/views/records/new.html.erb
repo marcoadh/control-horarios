@@ -1,28 +1,32 @@
 <%= form_for :record, url: records_path do |f| %>
+  <br><br>
+  <div class="card">
+    <div class="card-body">
+      <div class="item form-group">
+        <%= f.label :tipo, "Tipo de marcación" %>
+        <div class="input-group">
+          <%= f.select(:tipo, options_for_select([['Entrada', 'entrada'], ['Salida', 'salida']]), html_options = { class: "form-select" }) %>
+        </div>
+      </div>
 
-    <div class="item form-group">
-      <%= f.label :tipo, "Tipo de marcación" %>
-      <div class="input-group">
-        <%= f.select(:tipo, options_for_select([['Entrada', 'entrada'], ['Salida', 'salida']]), { :class=> "form-control" }) %>
+      <div class="item form-group">
+        <%= f.label :fecha, "Fecha" %>
+        <div class="form-group">
+          <%= f.datetime_local_field :fecha, {:class=> "form-control"} %>
+        </div>
+      </div>
+
+      <div class="item form-group">
+        <%= f.label :codigo, "Ingresa tu código de Empleado" %>
+        <div class="input-group">
+          <%= f.text_field :codigo, {:class=> "form-control"} %>
+        </div>
+      </div>
+
+      <div class="actions col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+        <%= f.submit "Guardar", :class => "btn btn-success"%>
       </div>
     </div>
-
-    <div class="item form-group">
-      <%= f.label :fecha, "Fecha" %>
-      <div class="form-group">
-        <%= f.datetime_local_field :fecha, {:class=> "form-control"} %>
-      </div>
-    </div>
-
-    <div class="item form-group">
-      <%= f.label :codigo, "Ingresa tu código de Empleado" %>
-      <div class="input-group">
-        <%= f.text_field :codigo, {:class=> "form-control"} %>
-      </div>
-    </div>
-
-    <div class="actions col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-      <%= f.submit "Guardar", :class => "btn btn-success"%>
-    </div>  
+  </div>
 <% end %>
 
