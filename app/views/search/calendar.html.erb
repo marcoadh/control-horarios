@@ -1,4 +1,7 @@
 <% horas_al_mes = 0 %>
+<% reg = @lista.first %>
+<h2><%= reg ? reg.employee.nombre + " " + reg.employee.apellido : "No hay registro de horarios" %></h2>
+<br>
 <%= month_calendar(attribute: :start_date, end_attribute: :end_date) do |date| %>
   <%= date.day %>
   <br>
@@ -11,5 +14,10 @@
     <% end %>
   <% end %>
 <% end %>
-
-<h2>Mensual: <%= horas_al_mes.round(2) %> Horas</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><h3>Horas al Mes: <%= horas_al_mes.round(2) %> Horas</h3></div>
+    </div>
+</div>

@@ -162,6 +162,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    ruby-ole (1.2.12.2)
     ruby_dep (1.5.0)
     rubyzip (2.3.2)
     sass (3.7.4)
@@ -188,6 +189,8 @@ GEM
       rubyzip (>= 1.2.2)
     simple_calendar (2.4.3)
       rails (>= 3.0)
+    spreadsheet (1.2.9)
+      ruby-ole
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -243,6 +246,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_calendar (~> 2.4)
+  spreadsheet
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
