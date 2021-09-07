@@ -24,7 +24,6 @@
                     <tr id = "empleado_<%= e.id %>">
                         <td><%= e.id %></td>
                         <td><%= e.nombre + ", " + e.apellido %></td>
-                        <td><%= link_to "Reporte", reports_path(:id => e.id), html_options = {class: "btn btn-dark"} %></td>
                         <td><%= link_to "Calendario", searchInCalendar_path(:id => e.id), html_options = {class: "btn btn-primary"} %></td>
                         <td><%= link_to "editar", edit_employee_path(e), html_options = {class: "btn btn-info btn-xs", remote: true} %></td>
                         <td><%= link_to 'borrar', e, remote: true, method: :delete, data: {confirm: "¿Eliminar empleado: #{e.nombre}?"}, class: "btn btn-danger btn-xs"%></td>

@@ -10,7 +10,15 @@ User.create(email: 'admingeo@gmail.com', password: 'admin123', password_confirma
 Employee.create(nombre: 'Anna Isabel', apellido: 'Alvarez Quispe')
 Employee.create(nombre: 'Carlos', apellido: 'Yosa Perez')
 
-Record.create(job_entry: '2021-09-02 08:00:00', job_exit: '2021-09-02 18:00:00', daily_hours: 10.0, employee_id: 1)
-Record.create(job_entry: '2021-09-03 08:00:00', job_exit: '2021-09-03 19:00:00', daily_hours: 11.0, employee_id: 1)
-Record.create(job_entry: '2021-09-01 09:00:00', job_exit: '2021-09-01 16:00:00', daily_hours: 7.0, employee_id: 2)
-Record.create(job_entry: '2021-09-03 09:04:00', job_exit: '2021-09-03 17:07:00', daily_hours: 8.05, employee_id: 2)
+agosto_i = Date.new(2021,8).beginning_of_month
+agosto_f = Date.new(2021,8).end_of_month
+
+sept_i = Date.new(2021,9).beginning_of_month
+
+(agosto_i..agosto_f).each do |d|
+    Record.create(job_entry: "2021-08-#{d.day} 09:00:00", job_exit: "2021-08-#{d.day} 18:00:00", daily_hours: 9.0, employee_id: 1)
+end
+
+(sept_i..Date.today).each do |f|
+    Record.create(job_entry: "2021-09-#{f.day} 09:00:00", job_exit: "2021-09-#{f.day} 18:00:00", daily_hours: 9.0, employee_id: 2)
+end

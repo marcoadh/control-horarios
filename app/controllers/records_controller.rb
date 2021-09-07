@@ -20,24 +20,63 @@ class RecordsController < ApplicationController
     end
 
     def create
-        if record_params['tipo'] == 'entrada'
-            @registro = Record.new()
-            @registro.job_entry = record_params['fecha']
-            @registro.employee_id = record_params['codigo']
-        else
-            @registro = Record.where("employee_id=#{record_params['codigo']} AND job_entry<'#{record_params['fecha']}' AND job_exit IS NULL").take
-            @registro.job_exit = record_params['fecha']
-            @registro.daily_hours = (Time.parse(@registro.job_exit.strftime("%Y-%m-%d %H:%M")) - Time.parse(@registro.job_entry.strftime("%Y-%m-%d %H:%M")))/3600
-        end
+        begin
+            tipo = record_params['tipo']
+            fecha = record_params['fecha']
+            codigo_emp = record_params['codigo']
 
-        respond_to do |format|
-            if @registro.save
-                format.html { redirect_to @registro, notice: "" }
-                format.json { render :show, status: :created, location: @registro }
+            if tipo == 'entrada'
+                #registro = Record.where(job_entry: fecha, employee_id: codigo_emp)
+                registro = Record.where("job_entry LIKE '%#{fecha.to_date}%' AND employee_id = #{codigo_emp}")
+
+                if registro.length > 0
+                    mensaje = <<END_STR
+                    Buen día, #{registro.first.employee.nombre}!!
+                    El sistema validó su registro e indica que ya ingresó su entrada a las #{(registro.first.job_entry).strftime("%I:%M:%S %p")} 
+                    con la fecha #{(registro.first.job_entry).strftime("%d-%m-%Y")}.
+                    No puedes registrarte dos veces en un día.
+END_STR
+                    raise mensaje
+                else
+                    @registro = Record.new()
+                    @registro.job_entry = fecha
+                    @registro.employee_id = codigo_emp
+                end
             else
-                format.html { render :new, status: :unprocessable_entity }
-                format.json { render json: @registro.errors, status: :unprocessable_entity }
+                registro = Record.where("job_exit IS NULL AND employee_id = #{codigo_emp}")
+                if registro.length == 0
+                    mensaje = <<END_STR
+                    No puedes marcar tu salida de trabajo sin antes haber ingresado, no seas pillín.
+END_STR
+                    raise mensaje
+                elsif registro.first.job_entry >= fecha
+                    mensaje = <<END_STR
+                    Hey tranquilo ¡Marty McFly!
+                    Tu hora de salida no puede ser antes de la hora de entrada,
+                    regresa al presente y respeta las reglas del tiempo y de tu trabajo! :v
+END_STR
+                    raise mensaje
+                else
+                    @registro = Record.where("job_exit IS NULL AND employee_id = #{codigo_emp}").take
+                    @registro.job_exit = fecha
+                    fecha_salida = @registro.job_exit.strftime("%Y-%m-%d %H:%M")
+                    fecha_entrada = @registro.job_entry.strftime("%Y-%m-%d %H:%M")
+                    @registro.daily_hours = (Time.parse(fecha_salida) - Time.parse(fecha_entrada))/3600
+                end
             end
+    
+            respond_to do |format|
+                if @registro.save
+                    format.html { redirect_to @registro, notice: "El registro de horario se logró de manera exitosa." }
+                    format.json { render :show, status: :created, location: @registro }
+                else
+                    format.html { render :new, status: :unprocessable_entity }
+                    format.json { render json: @registro.errors, status: :unprocessable_entity }
+                end
+            end
+        rescue => exception
+            @error = exception
+            render template: "records/errors.html.erb"
         end
     end
 
@@ -45,6 +84,9 @@ class RecordsController < ApplicationController
     end
 
     def destroy
+    end
+
+    def errors
     end
 
     private

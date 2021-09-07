@@ -4,10 +4,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        Descargar Reporte: 
-                        <%= link_to 'CSV', reports_path(:id => params[:id], format: :csv) %> |
-                        <%= link_to 'XLS', reports_path(:id => params[:id], format: :xls) %> |
-                        <%= link_to "HTML", reports_path(:id => params[:id]), :download => 'Reporte_Horario' %>
+                        Descargar Reporte en HTML:
+                        <%= link_to "Aquí", reports_path(:id => params[:id]), :download => 'Reporte_Horario' %>
                         
                     </div>
                 </div>
@@ -40,9 +38,7 @@
             </table>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3"></div>
+                    <div class="col-md-9"></div>
                     <div class="col-md-3"><h4>Mensual: <%= horas_al_mes.round(2) %> Horas</h4></div>
                 </div>
             </div>

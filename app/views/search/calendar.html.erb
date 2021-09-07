@@ -16,8 +16,13 @@
 <% end %>
 <div class="container">
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4"></div>
+        <div class="col-md-6">
+          Descargar Reporte: 
+          <%= link_to 'CSV', searchInCalendar_path(:id => params[:id], format: :csv) %> |
+          <%= link_to 'XLS', searchInCalendar_path(:id => params[:id], format: :xls) %> |
+          <%= link_to "HTML", reports_path(:id => params[:id])%>
+        </div>
+        <div class="col-md-2"></div>
         <div class="col-md-4"><h3>Horas al Mes: <%= horas_al_mes.round(2) %> Horas</h3></div>
     </div>
 </div>
