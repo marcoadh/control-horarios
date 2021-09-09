@@ -7,8 +7,11 @@ Rails.application.routes.draw do
   resources :search
   resources :profiles, only: [:show, :edit, :update]
 
-  get 'reports', to: 'reports#index'
-  post 'reports', to: 'reports#index'
+  get 'report', to: 'reports#report'
+  post 'report', to: 'reports#report'
+
+  get 'export', to: 'reports#export'
+  post 'export', to: 'reports#export'
 
   get 'searchInCalendar', to: 'search#calendar'
   post 'searchInCalendar', to: 'search#calendar'

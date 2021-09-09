@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="card shadow col-md-6">
+            <div class="form-group">
+                <div class="card-header">
+                    <h2>Generar Reportes</h2>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="card-body">
+                    <%= form_tag export_path, method: :get do %>
+                        <div class="form-group mb-3">
+                            <%= label :employee_id, "Seleccionar empleado" %>
+                            <%= select_tag :employee_id, options_from_collection_for_select(@employee, "id", "nombre_completo", params[:employee_id]), html_options = {class: "form-control"} %>
+                        </div>
+                        <div class="form-group mb-3">
+                            <%= label :date_range, "Seleccionar el mes y año" %>
+                            <%= month_field_tag :date_range, options = {}, html_options = { class: "form-control" } %>
+                        </div>
+                        <div class="form-group w-50">
+                            <%= submit_tag(value = "Buscar", options = { class: "btn btn-dark" }) %>
+                        </div>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

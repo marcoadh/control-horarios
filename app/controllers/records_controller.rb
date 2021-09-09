@@ -46,14 +46,12 @@ END_STR
                 registro = Record.where("job_exit IS NULL AND employee_id = #{codigo_emp}")
                 if registro.length == 0
                     mensaje = <<END_STR
-                    No puedes marcar tu salida de trabajo sin antes haber ingresado, no seas pillín.
+                    No puedes marcar tu salida de trabajo sin antes haber ingresado.
 END_STR
                     raise mensaje
                 elsif registro.first.job_entry >= fecha
                     mensaje = <<END_STR
-                    Hey tranquilo ¡Marty McFly!
-                    Tu hora de salida no puede ser antes de la hora de entrada,
-                    regresa al presente y respeta las reglas del tiempo y de tu trabajo! :v
+                    Tu hora de salida no puede ser antes de la hora de entrada.
 END_STR
                     raise mensaje
                 else

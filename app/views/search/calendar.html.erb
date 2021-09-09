@@ -1,36 +1,30 @@
-<div class="row">
-  
-  <div class="col-md-12">
-    <% horas_al_mes = 0 %>
-    <% reg = @lista.first %>
-    <h2>
-      <%= reg ? reg.employee.nombre + ", " + reg.employee.apellido : "No hay registro de horarios" %>
-    </h2>
-    <br>
-    <%  %>
-    <%= month_calendar(attribute: :start_date, end_attribute: :end_date) do |date| %>
-      <%= date.day %><br>
-      <% @lista.each do |registro| %>
-        <% if registro.job_entry.to_date == date %>
-          <%= registro.job_entry.strftime("%I:%M:%S %p") %><br>
-          <%= registro.job_exit ? registro.job_exit.strftime("%I:%M:%S %p") : "Sigue trabajando" %><br>
-          <%= registro.daily_hours ? "Hrs diarias : " + registro.daily_hours.round(2).to_s : "" %>
-          <% horas_al_mes = horas_al_mes + registro.daily_hours.to_f %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <% horas_al_mes = 0 %>
+      <% reg = @lista.first %>
+      <h2>
+        <%= reg ? reg.employee.nombre + ", " + reg.employee.apellido : "No hay registro de horarios" %>
+      </h2>
+      <br>
+      <%= month_calendar(attribute: :start_date, end_attribute: :end_date) do |date| %>
+        <%= date.day %>
+        <br>
+        <% @lista.each do |registro| %>
+          <% if registro.job_entry.to_date == date %>
+            <%= registro.job_entry.strftime("%I:%M:%S %p") %><br>
+            <%= registro.job_exit ? registro.job_exit.strftime("%I:%M:%S %p") : "Sigue trabajando" %><br>
+            <%= registro.daily_hours ? "Hrs diarias : " + registro.daily_hours.round(2).to_s : "" %>
+            <% horas_al_mes = horas_al_mes + registro.daily_hours.to_f %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-          Descargar Reporte: 
-          <%= link_to 'CSV', searchInCalendar_path(:id => reg.employee_id, format: :csv) %> |
-          <%= link_to 'XLS', searchInCalendar_path(:id => reg.employee_id, format: :xls) %> |
-          <%= link_to "HTML", reports_path(:id => reg.employee_id)%>
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-4"><h3>Horas al Mes: <%= horas_al_mes.round(2) %> Horas</h3></div>
-    </div>
+  <div class="row">
+    <div class="col-md-4"><h3>Horas al Mes: <%= horas_al_mes.round(2) %></h3></div>
+  </div>
 </div>

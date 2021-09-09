@@ -4,7 +4,7 @@
   xmlns:x="urn:schemas-microsoft-com:office:excel"
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
-  <% reg = @records.first %>
+  <% reg = @registers.first %>
   <Worksheet ss:Name="Reporte horarios de <%= reg.employee.nombre%>">
     <Table>
       <Row><Cell><Data ss:Type="String">Nombre Completo</Data></Cell></Row>
@@ -17,12 +17,12 @@
         <Cell><Data ss:Type="String">Sub total de Horas</Data></Cell>
       </Row>
     <% horas_mes = 0 %>
-    <% @records.each do |record| %>
+    <% @registers.each do |record| %>
       <Row>
         <Cell><Data ss:Type="String"><%= record.job_entry.strftime("%d-%m-%Y") %></Data></Cell>
         <Cell><Data ss:Type="String"><%= record.job_entry.strftime("%I:%M:%S %p") %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= record.job_exit.strftime("%I:%M:%S %p") %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= record.daily_hours.round(2) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.job_exit ? record.job_exit.strftime("%I:%M:%S %p") : "Sigue trabajando" %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= record.daily_hours ? record.daily_hours.round(2) : "Falta hora de salida para calcular horas." %></Data></Cell>
       </Row>
       <% horas_mes = horas_mes + record.daily_hours.to_f %>
     <% end %>

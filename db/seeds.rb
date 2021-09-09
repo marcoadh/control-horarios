@@ -8,7 +8,7 @@
 User.create(email: 'admingeo@gmail.com', password: 'admin123', password_confirmation: 'admin123')
 
 Employee.create(nombre: 'Anna Isabel', apellido: 'Alvarez Quispe')
-Employee.create(nombre: 'Carlos', apellido: 'Yosa Perez')
+Employee.create(nombre: 'Edson Roberto', apellido: 'Yosa Perez')
 
 agosto_i = Date.new(2021,8).beginning_of_month
 agosto_f = Date.new(2021,8).end_of_month

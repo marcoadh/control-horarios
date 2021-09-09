@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <% reg = @registers.first %>
+            <hr><h3><%= reg ? reg.employee.nombre + " " + reg.employee.apellido : "No hay registro de horarios" %></h3><hr>
+            <table class="table table-bordered" id="tablaRegistros" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Horas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% horas_al_mes = 0 %>
+                    <% @registers.each do |reg| %>
+                    <tr>
+                        <td><%= reg.job_entry.strftime("%d - %m - %Y") %></td>
+                        <td><%= reg.job_entry.strftime("%I:%M:%S %p") %></td>
+                        <td><%= reg.job_exit ? reg.job_exit.strftime("%I:%M:%S %p") : "Sigue trabajando" %></td>
+                        <td><%= reg.daily_hours ? reg.daily_hours.round(2).to_s + " Horas" : "" %></td>
+                        <% horas_al_mes = horas_al_mes + reg.daily_hours.to_f %>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4"><hr>
+            
+            <% if @registers.length > 0 %>
+                <div class="col-md-12">
+                    <h3 class = "text-center">Total de horas : <%= horas_al_mes.round(2) %></h3>
+                </div>
+            <% else %>
+                <h3 class = "text-center">No hay horas</h3>
+            <% end %>
+            <hr><hr>
+            <div class="col-md-12 text-center">
+                <% if @registers.length > 0 %>
+                
+                    <div class="col-md-12">
+                        <h4>Descargar Reporte:</h4>
+                    </div>
+                    <h4>
+                        <%= link_to "CSV", export_path(:employee_id => @employee_id, :date_range => params[:date_range], format: :csv) %> |
+                        <%= link_to "XLS", export_path(:employee_id => @employee_id, :date_range => params[:date_range], format: :xls) %> |
+                        <%= link_to "HTML", export_path(:employee_id => @employee_id, :date_range => params[:date_range]), :download => 'Reporte_Horario' %>
+                    </h4>
+                    
+                <% else %>
+                    
+                    <h4>No hay reportes para descargar</h4>
+
+                <% end %>
+            </div>
+        </div>
+    </div>    
+</div>
