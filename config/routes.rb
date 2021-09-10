@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :records
   resources :search
   resources :profiles, only: [:show, :edit, :update]
+  resources :documents
 
   get 'report', to: 'reports#report'
   post 'report', to: 'reports#report'

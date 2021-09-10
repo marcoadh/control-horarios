@@ -1,0 +1,26 @@
+<div class="card shadow mb-4">
+    <div class="card-header"><h2>Listado de Documentos</h2></div><br>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tablaEmpleados" class="table table-bordered" width="100%">
+                <thead>
+                    <tr>
+                        <th class = "text-center">#</th>
+                        <th class = "text-center">Nombre del Documento</th>
+                        <th class = "text-center">Opciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% @documents.each do |d| %>
+                    <tr>                        
+                        <td class = "text-center"><%= d.id %></td>
+                        <td><%= d.name_file %></td>
+                        <td><%= link_to "Descargar Reporte", url_for(d.file) %></td>
+                    </tr>  
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

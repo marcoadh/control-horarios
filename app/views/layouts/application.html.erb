@@ -54,8 +54,14 @@
         </li>
         <li class="nav-item">
             <%= link_to report_path, class: "nav-link" do %>
+                <i class="fas fa-file-download"></i>
+                <span>Reportes</span>
+            <% end %>
+        </li>
+        <li class="nav-item">
+            <%= link_to documents_path, class: "nav-link" do %>
                 <i class="far fa-file-alt"></i>
-                <span>Reporte</span>
+                <span>Archivos</span>
             <% end %>
         </li>
       </ul>
