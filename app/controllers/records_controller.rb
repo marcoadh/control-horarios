@@ -49,7 +49,7 @@ END_STR
                     No puedes marcar tu salida de trabajo sin antes haber ingresado.
 END_STR
                     raise mensaje
-                elsif registro.first.job_entry >= fecha
+                elsif registro.first.job_entry.to_time >= fecha.to_time
                     mensaje = <<END_STR
                     Tu hora de salida no puede ser antes de la hora de entrada.
 END_STR

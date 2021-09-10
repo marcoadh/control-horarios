@@ -45,8 +45,8 @@
                     </div>
                     <h4>
                         <%= link_to "CSV", export_path(:employee_id => @employee_id, :date_range => params[:date_range], format: :csv) %> |
-                        <%= link_to "XLS", export_path(:employee_id => @employee_id, :date_range => params[:date_range], format: :xls) %> |
-                        <%= link_to "HTML", export_path(:employee_id => @employee_id, :date_range => params[:date_range]), :download => 'Reporte_Horario' %>
+                        <%= link_to "XLS", export_path(:employee_id => @employee_id, :date_range => params[:date_range], format: :xls) %>
+                        <!-- <%= link_to "HTML", export_path(:employee_id => @employee_id, :date_range => params[:date_range]), :download => 'Reporte_Horario' %> -->
                     </h4>
                     
                 <% else %>

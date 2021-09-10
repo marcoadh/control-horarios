@@ -17,8 +17,9 @@ class Record < ApplicationRecord
 
     CSV.generate do |csv|
         nombre = all.first
+        
         csv << ["Nombre Completo"]
-        csv << [nombre.employee.nombre + ", " + nombre.employee.apellido]
+        csv << [nombre ? nombre.employee.nombre + ", " + nombre.employee.apellido : ""]
         csv << []
         csv << attributes
         hrs_mes = 0

@@ -16,8 +16,13 @@
                     <tr>                        
                         <td class = "text-center"><%= d.id %></td>
                         <td><%= d.name_file %></td>
-                        <td><%= link_to "Descargar Reporte", url_for(d.file) %></td>
-                    </tr>  
+                        <td>
+                            <% if d.file.attached? %>
+                                <%= link_to "Descargar Reporte", url_for(d.file) %></td>
+                            <% else %>
+                                ----------------------
+                            <% end %>
+                        </tr>  
                     <% end %>
                 </tbody>
             </table>
