@@ -19,6 +19,7 @@
                             <%= label :date_range, "Seleccionar el mes y año" %>
                             <%= month_field_tag :date_range, options = {}, html_options = { class: "form-control" } %>
                         </div>
+                        <%= hidden_field(:export, :ignore_save, :value => 1) %>
                         <div class="form-group w-50">
                             <%= submit_tag(value = "Buscar", options = { class: "btn btn-dark" }) %>
                         </div>

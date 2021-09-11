@@ -9,16 +9,20 @@ User.create(email: 'admingeo@gmail.com', password: 'admin123', password_confirma
 
 Employee.create(nombre: 'Anna Isabel', apellido: 'Alvarez Quispe')
 Employee.create(nombre: 'Edson Roberto', apellido: 'Yosa Perez')
+Employee.create(nombre: 'Marco Antonio', apellido: 'De la cruz Henriquez')
 
 agosto_i = Date.new(2021,8).beginning_of_month
 agosto_f = Date.new(2021,8).end_of_month
-
-sept_i = Date.new(2021,9).beginning_of_month
-
 (agosto_i..agosto_f).each do |d|
     Record.create(job_entry: "2021-08-#{d.day} 09:00:00", job_exit: "2021-08-#{d.day} 18:00:00", daily_hours: 9.0, employee_id: 1)
 end
 
+sept_i = Date.new(2021,9).beginning_of_month
+sept_m = Date.new(2021,9,5)
 (sept_i..Date.today).each do |f|
     Record.create(job_entry: "2021-09-#{f.day} 09:00:00", job_exit: "2021-09-#{f.day} 18:00:00", daily_hours: 9.0, employee_id: 2)
+end
+
+(sept_i..sept_m).each do |f|
+    Record.create(job_entry: "2021-09-#{f.day} 09:00:00", job_exit: "2021-09-#{f.day} 18:00:00", daily_hours: 9.0, employee_id: 3)
 end
